@@ -1,0 +1,1 @@
+sixteenth-night: minimalistic (single) deadline management tool. Simply displays number of working hours left until deadline.
