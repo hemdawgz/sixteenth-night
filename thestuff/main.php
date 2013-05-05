@@ -1,13 +1,27 @@
 <?php
 
 //All dummy values for now
-$GMTOffset= -4;
+/*$GMTOffset= -4;
 $adjustedTime = time() + (3600 * $GMTOffset);
 $busyTime = 0;
 $deadlnTime = 1367798400;
-$timeLeft = ($deadlnTime - $adjustedTime - $busyTime);
+$timeLeft = ($deadlnTime - $adjustedTime - $busyTime);*/
 
-//These are the things that actually get printed out
+require 'lib.php';
+
+$userID = 'superman';
+
+$userData = load_data($userID);
+
+$timeLeft = $userData->timeRemaining();
+
+$deadlnTime = $userData->deadlineTime;
+
+date_default_timezone_set($userData->timeZone);
+
+//These are the things that actually get printed out (temporary,
+//I plan on letting the browser handle that JS later on for live updates)
+
 $deadlnTimeStr = date("g:i a", $deadlnTime);
 
 $deadlnDateStr = date("M d, Y", $deadlnTime);
@@ -18,6 +32,7 @@ if ($timeLeft < 3600) {
 else {
 	$timeLeftStr = floor($timeLeft/3600) . " hours";
 }
+
 
 $pagecontents = <<<EOPAGE
 <!DOCTYPE html>
